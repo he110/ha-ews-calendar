@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Integration icon (light and dark), shown by Home Assistant 2026.3 and newer.
+
 ## 0.1.0
 
 First release.

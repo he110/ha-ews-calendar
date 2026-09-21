@@ -248,3 +248,14 @@ async def test_server_down_at_startup_retries(hass: HomeAssistant, ews) -> None:
     await hass.config_entries.async_reload(entry.entry_id)
     await hass.async_block_till_done()
     assert entry.state is ConfigEntryState.SETUP_RETRY
+
+
+async def test_brand_images_are_served_locally(hass: HomeAssistant) -> None:
+    """HA 2026.3+ serves custom integration icons from custom_components/<domain>/brand/."""
+    import pytest
+    from homeassistant.loader import async_get_custom_components
+
+    integration = (await async_get_custom_components(hass))[DOMAIN]
+    if not hasattr(integration, "has_branding"):
+        pytest.skip("Local brand images need Home Assistant 2026.3+")
+    assert integration.has_branding

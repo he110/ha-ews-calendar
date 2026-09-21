@@ -1,14 +1,22 @@
 {
   "domain": "ews_calendar",
   "name": "Exchange Calendar (EWS)",
-  "codeowners": ["@he110"],
+  "codeowners": [
+    "@he110"
+  ],
   "config_flow": true,
-  "dependencies": ["calendar"],
+  "dependencies": [
+    "calendar"
+  ],
   "documentation": "https://github.com/he110/ha-ews-calendar",
   "integration_type": "service",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/he110/ha-ews-calendar/issues",
-  "loggers": ["spnego"],
-  "requirements": ["pyspnego==0.12.2"],
-  "version": "0.1.0"
+  "loggers": [
+    "spnego"
+  ],
+  "requirements": [
+    "pyspnego==0.12.2"
+  ],
+  "version": "0.1.1"
 }
