@@ -1,0 +1,50 @@
+name: Bug report
+description: Something does not work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Please **do not paste passwords, server names or e-mail addresses** —
+        the diagnostics file below already has them removed.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, what happened instead.
+    validations:
+      required: true
+  - type: input
+    id: exchange
+    attributes:
+      label: Exchange version
+      description: Shown on the device page (e.g. 15.2.1748.39), or "Exchange 2019 CU14".
+  - type: dropdown
+    id: auth
+    attributes:
+      label: Authentication
+      options: [NTLM, Basic, Not sure]
+  - type: input
+    id: ha
+    attributes:
+      label: Home Assistant version
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Integration version
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: Settings → Devices & services → Exchange Calendar → ⋮ → Download diagnostics. Drag the file here.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Debug log
+      description: |
+        With `logger: logs: custom_components.ews_calendar: debug` enabled. Check it for addresses before posting.
+      render: text

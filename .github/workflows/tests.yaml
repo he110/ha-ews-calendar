@@ -1,0 +1,38 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Ruff
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/ruff-action@v3
+      - run: ruff format --check
+
+  pytest:
+    name: pytest (HA ${{ matrix.ha }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ha: "2026.2"
+            python: "3.13"
+            phcc: "0.13.316"
+          - ha: latest
+            python: "3.14"
+            phcc: "0.13.366"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install
+        run: pip install "pytest-homeassistant-custom-component==${{ matrix.phcc }}" pyspnego==0.12.2
+      - name: Test
+        run: pytest tests -q

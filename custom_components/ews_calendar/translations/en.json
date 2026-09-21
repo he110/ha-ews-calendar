@@ -1,0 +1,115 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Microsoft Exchange",
+        "description": "Read-only access to calendars on an on-premises Exchange Server (2013–2019, SE) via Exchange Web Services. Exchange Online (Microsoft 365) is not supported.",
+        "data": {
+          "url": "Server",
+          "username": "Username",
+          "password": "Password",
+          "auth_method": "Authentication",
+          "verify_ssl": "Verify SSL certificate"
+        },
+        "data_description": {
+          "url": "Host name (mail.example.com) or the full EWS URL (https://mail.example.com/EWS/Exchange.asmx).",
+          "username": "Usually your e-mail address or DOMAIN\\username.",
+          "auth_method": "Automatic picks NTLM when the server offers it, otherwise Basic.",
+          "verify_ssl": "Turn off only for servers with a self-signed or internal certificate."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Exchange password changed",
+        "description": "The server rejected the password for {username}. Enter the current password.",
+        "data": {
+          "password": "Password"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Exchange account",
+        "description": "Account: {username}",
+        "data": {
+          "url": "Server",
+          "password": "Password",
+          "auth_method": "Authentication",
+          "verify_ssl": "Verify SSL certificate"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "The server rejected the username or password. Check them by signing in to Outlook on the web before trying again: repeated failures may lock the account.",
+      "cannot_connect": "Could not reach the EWS endpoint. Check the server address and that EWS is enabled for your account.",
+      "ssl_error": "The server certificate could not be verified. If the server uses a self-signed or internal certificate, turn off certificate verification.",
+      "no_auth_method": "The server offers neither NTLM nor Basic authentication.",
+      "ews_error": "Exchange returned an error. See the Home Assistant log for details.",
+      "unknown": "Unexpected error. See the Home Assistant log for details."
+    },
+    "abort": {
+      "already_configured": "This account is already configured.",
+      "reauth_successful": "Password updated.",
+      "reconfigure_successful": "Account updated."
+    }
+  },
+  "config_subentries": {
+    "calendar": {
+      "initiate_flow": {
+        "user": "Add shared calendar"
+      },
+      "entry_type": "Calendar",
+      "step": {
+        "user": {
+          "title": "Add a shared calendar",
+          "description": "Calendar of another mailbox (a colleague, a room, a shared mailbox) that this account is allowed to read.",
+          "data": {
+            "mailbox": "Mailbox e-mail address",
+            "name": "Name"
+          },
+          "data_description": {
+            "name": "Optional. Defaults to the mailbox address."
+          }
+        }
+      },
+      "error": {
+        "mailbox_not_found": "No mailbox with this address.",
+        "access_denied": "This account has no permission to read that calendar.",
+        "invalid_auth": "The account password is no longer valid. Reauthenticate the account first.",
+        "cannot_connect": "Could not reach the Exchange server.",
+        "ssl_error": "The server certificate could not be verified.",
+        "no_auth_method": "The server offers neither NTLM nor Basic authentication.",
+        "ews_error": "Exchange returned an error. See the Home Assistant log for details.",
+        "unknown": "Unexpected error. See the Home Assistant log for details."
+      },
+      "abort": {
+        "already_configured": "This calendar is already added."
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Exchange calendar options",
+        "description": "Apply to every calendar of this account.",
+        "data": {
+          "scan_interval": "Update interval",
+          "days_ahead": "Days ahead to keep in cache",
+          "include_description": "Load event descriptions",
+          "exclude_declined": "Hide meetings I declined",
+          "exclude_cancelled": "Hide cancelled meetings"
+        },
+        "data_description": {
+          "days_ahead": "Events further ahead are still fetched on demand, e.g. when browsing the calendar.",
+          "include_description": "Meeting body as plain text (often contains the online meeting link). One extra request per 50 events."
+        }
+      }
+    }
+  },
+  "selector": {
+    "auth_method": {
+      "options": {
+        "auto": "Automatic",
+        "ntlm": "NTLM",
+        "basic": "Basic"
+      }
+    }
+  }
+}
