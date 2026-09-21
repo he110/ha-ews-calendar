@@ -1,5 +1,6 @@
 """Import the HA-independent modules without running the package __init__ (it imports HA)."""
 
+import contextlib
 import pathlib
 import sys
 import types
@@ -20,10 +21,8 @@ import fake_ews
 def _allow_sockets(request):
     """These tests run a fake server on localhost. When the Home Assistant pytest plugin is
     installed (the full test environment), sockets are blocked unless explicitly enabled."""
-    try:
+    with contextlib.suppress(pytest.FixtureLookupError):
         request.getfixturevalue("socket_enabled")
-    except pytest.FixtureLookupError:
-        pass
 
 
 @pytest.fixture

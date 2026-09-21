@@ -161,6 +161,7 @@ class EwsCalendarConfigFlow(ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="user",
             data_schema=self.add_suggested_values_to_schema(schema, user_input),
+            description_placeholders={"ews_url_example": "https://mail.example.com/EWS/Exchange.asmx"},
             errors=errors,
         )
 

@@ -12,7 +12,7 @@
           "verify_ssl": "Проверять SSL-сертификат"
         },
         "data_description": {
-          "url": "Имя хоста (mail.example.com) или полный адрес EWS (https://mail.example.com/EWS/Exchange.asmx).",
+          "url": "Имя хоста (mail.example.com) или полный адрес EWS ({ews_url_example}).",
           "username": "Обычно адрес почты или ДОМЕН\\логин.",
           "auth_method": "«Автоматически» выбирает NTLM, если сервер его предлагает, иначе Basic.",
           "verify_ssl": "Выключайте только для серверов с самоподписанным или внутренним сертификатом."
